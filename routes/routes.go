@@ -1,17 +1,21 @@
 package routes
 
 import (
+	"gudang/controllers"
+	"net/http"
+
 	"github.com/gorilla/mux"
 	"gorm.io/gorm"
-	// "rocketin-movie/controllers"
 )
 
 func RegisterRoutes(db *gorm.DB, e *mux.Router) {
 
-	// movieController := controllers.NewMovieController(db)
+	historyController := controllers.NewHistoryController(db)
 	// genreController := controllers.NewGenreController(db)
 	// mostController := controllers.NewMostController(db)
 	// userController := controllers.NewUserController(db)
+
+	e.HandleFunc("/history", historyController.GetAllHistories).Methods(http.MethodGet)
 
 	// e.HandleFunc("/movies-all", movieController.GetAllMovie).Methods(http.MethodGet)
 	// e.HandleFunc("/movies", movieController.GetMovie).Methods(http.MethodGet)
