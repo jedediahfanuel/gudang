@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"net/http"
+	"os"
 
 	"fmt"
 
@@ -27,7 +28,7 @@ func main() {
 
 	r := mux.NewRouter()
 	corsHandler := handlers.CORS(
-		handlers.AllowedOrigins([]string{"http://127.0.0.1:5500", "http://localhost:5500"}),
+		handlers.AllowedOrigins([]string{os.Getenv("FRONTEND_LINK")}),
 		handlers.AllowedMethods([]string{"GET", "POST", "PUT", "DELETE"}),
 		handlers.AllowedHeaders([]string{"Content-Type"}),
 	)(r)
